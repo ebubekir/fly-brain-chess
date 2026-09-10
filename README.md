@@ -2,6 +2,18 @@
 
 **Your move. Its neurons.**
 
+<p align="center">
+  <img src="docs/screenshots/desktop.png" alt="Fly Brain Chess desktop interface with chessboard and glowing 3D neural network" width="100%">
+</p>
+
+<p align="center"><em>A live chessboard on the left; FlyWire-derived activity rendered in 3D on the right.</em></p>
+
+<p align="center">
+  <img src="docs/screenshots/mobile.png" alt="Fly Brain Chess responsive mobile interface" width="360">
+</p>
+
+<p align="center"><em>The same game surface adapts to smaller screens.</em></p>
+
 Play chess against a spiking neural network whose frozen reservoir is induced
 from a real FlyWire FAFB v783 subgraph. Watch sensory impulses
 spread through a glowing 3D graph, then resolve into a legal move. Everything
