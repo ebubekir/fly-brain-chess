@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b1015" />
+    <meta
+      name="description"
+      content="Play chess against a FlyWire-based spiking neural network and watch its activity in 3D. Local. Open source. FlyWire-inspired."
+    />
+    <title>Fly Brain / Chess</title>
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="/" aria-label="Fly Brain Chess home"
+        ><span class="brand-mark">✳</span> FLY BRAIN
+        <span class="slash">/</span> <span class="brand-sub">CHESS</span></a
+      >
+      <div class="connection">
+        <i id="connection-dot"></i><span id="connection">Connecting</span
+        ><span class="local-badge">ON PREMISE</span>
+      </div>
+    </header>
+    <main>
+      <div class="intro">
+        <div>
+          <p class="eyebrow">A LITTLE BRAIN. AN ENTIRE GAME.</p>
+          <h1>Your move. <span>Its neurons.</span></h1>
+        </div>
+        <p>
+          Meet a different kind of opponent.<br />Watch a spiking network turn
+          sensation into a move.
+        </p>
+      </div>
+      <div class="workspace">
+        <section class="board-panel" aria-label="Chess game">
+          <div class="panel-top">
+            <span class="eyebrow">01 / THE BOARD</span
+            ><span class="tag">YOU PLAY WHITE</span>
+          </div>
+          <div class="opponent">
+            <span class="avatar brain-avatar">✳</span>
+            <div>
+              <strong>Fly Brain</strong><small>FlyWire v783 · Trained readout</small>
+            </div>
+            <span class="side-label">BLACK</span>
+          </div>
+          <div
+            id="board"
+            aria-label="Chessboard; drag pieces or use the move field below"
+          ></div>
+          <div class="opponent">
+            <span class="avatar">♙</span>
+            <div>
+              <strong>You</strong><small>A human advantage. Probably.</small>
+            </div>
+            <span class="side-label">WHITE</span>
+          </div>
+          <div class="status-row">
+            <i id="turn-dot"></i
+            ><strong id="status" role="status" aria-live="polite"
+              >Connecting to the brain…</strong
+            ><button id="reset" disabled>New game ↗</button>
+          </div>
+          <form id="move-form">
+            <label for="move-input">Keyboard move</label
+            ><input
+              id="move-input"
+              placeholder="e2e4"
+              pattern="[a-h][1-8][a-h][1-8][qrbn]?"
+              maxlength="5"
+              autocomplete="off"
+              spellcheck="false"
+              aria-label="Move in UCI notation, for example e2e4"
+            /><button id="move-submit" disabled>Play →</button>
+          </form>
+          <p id="error" role="alert"></p>
+        </section>
+        <section class="brain-panel" aria-label="Live neural activity">
+          <div class="panel-top">
+            <span class="eyebrow">02 / INSIDE THE NETWORK</span
+            ><span class="live-label"><i></i> LIVE ACTIVITY</span>
+          </div>
+          <div id="visualizer">
+            <div class="canvas-caption">
+              <span>FLYWIRE v783 / FIXED SUBNETWORK</span
+              ><small>Graph layout · Drag to orbit · Scroll to zoom</small>
+            </div>
+            <div class="legend">
+              <span><i class="sensory"></i>Excitatory</span
+              ><span><i class="inter"></i>Inhibitory</span
+              >
+            </div>
+            <p id="gpu-error" hidden>
+              3D rendering is unavailable on this device. You can still play
+              chess.
+            </p>
+          </div>
+          <div class="activity-bar">
+            <span id="activity-label">Waiting for sensory input</span
+            ><span id="sim-time">0 / 200 ms</span>
+          </div>
+          <div class="progress-track"><div id="progress"></div></div>
+          <div class="metrics">
+            <div><strong id="neuron-count">—</strong><span>NEURONS</span></div>
+            <div><strong id="edge-count">—</strong><span>SYNAPSES</span></div>
+            <div>
+              <strong id="spike-count">0</strong><span>SPIKES / TRIAL</span>
+            </div>
+            <div>
+              <strong id="motor-count">0</strong><span>ACTIVE NEURONS</span>
+            </div>
+          </div>
+        </section>
+      </div>
+      <section class="bottom-row">
+        <div class="move-log">
+          <span class="eyebrow">MOVE HISTORY</span>
+          <ol id="history" aria-label="Move history">
+            <li class="empty">The first move is yours.</li>
+          </ol>
+        </div>
+        <div class="model-note">
+          <span class="eyebrow">REAL CONNECTIONS. TRAINED READOUT.</span>
+          <p>
+            Real FlyWire v783 neuron IDs and synapse counts. Connections stay fixed; only the output layer is trained. Chess inputs, neural dynamics, and graph coordinates are engineered.
+          </p>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <span>BUILT FOR CURIOSITY. RUNS ON YOUR MACHINE.</span
+      ><span>SENSORY → SPIKES → MOVE</span>
+    </footer>
+    <dialog id="promotion">
+      <form method="dialog">
+        <h2>Choose your promotion</h2>
+        <p>Your pawn has reached the other side.</p>
+        <div>
+          <button value="q">Queen</button><button value="r">Rook</button
+          ><button value="b">Bishop</button><button value="n">Knight</button>
+        </div>
+        <button value="cancel">Cancel</button>
+      </form>
+    </dialog>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

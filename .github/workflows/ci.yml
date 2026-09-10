@@ -1,0 +1,28 @@
+name: Verify
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: backend/requirements*.txt
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: pip install -r backend/requirements-dev.txt
+      - run: python -m pytest -q && ruff check app tests
+        working-directory: backend
+      - run: npm ci && npm run build && npm audit --omit=dev
+        working-directory: frontend
+      - run: docker compose up --build -d --wait --wait-timeout 180
+      - run: python scripts/smoke.py
+      - if: always()
+        run: docker compose logs && docker compose down

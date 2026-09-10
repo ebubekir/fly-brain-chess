@@ -1,0 +1,6 @@
+fastapi==0.141.1
+starlette==1.6.0
+uvicorn[standard]==0.35.0
+chess==1.11.2
+networkx==3.5
+numpy==2.3.2
